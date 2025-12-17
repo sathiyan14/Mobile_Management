@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,74 +8,106 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Mobile Service') }}</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <!-- Dark Mode Style -->
+    <style>
+        body {
+            background-color: rgba(73, 72, 72, 0.15);
+            transition: .3s;
+            color: #111;
+        }
+        .dark-mode {
+            background-color: #111 !important;
+            color: white !important;
+        }
+        .dark-mode nav,
+        .dark-mode footer {
+            background: #222 !important;
+        }
+        .dark-mode .card,
+        .dark-mode .modal-content,
+        .dark-mode .table {
+            background-color: #222 !important;
+            color: white !important;
+        }
+    </style>
+
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-md px-3">
+        <a class="navbar-brand text-white" href="/">
+            Mobile Service Center
+        </a>
 
-                    </ul>
+        <button id="themeToggle" class="btn btn-outline-light btn-sm me-2">
+            🌙
+        </button>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+        @auth
+        <div class="dropdown ms-auto">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                {{ Auth::user()->name }}
+            </button>
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="dropdown-item">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        @endauth
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+        @guest
+        <div class="ms-auto">
+            <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm me-2">Sign in</a>
+            <a href="{{ route('register') }}" class="btn btn-light btn-sm">Sign up</a>
+        </div>
+        @endguest
+    </nav>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main style="min-height:85vh;">
+        @yield('content')
+    </main>
+
+    <footer class="bg-dark text-white text-center py-2">
+        © {{ date('Y') }} Mobile Service Management App
+    </footer>
+
+
+    <!-- JS Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Dark Mode Toggle -->
+    <script>
+        const body = document.body;
+        const toggleBtn = document.getElementById("themeToggle");
+
+        if (localStorage.getItem("theme") === "dark") {
+            body.classList.add("dark-mode");
+            toggleBtn.textContent = "☀️";
+        }
+
+        toggleBtn.addEventListener("click", () => {
+            body.classList.toggle("dark-mode");
+            const isDark = body.classList.contains("dark-mode");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+            toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        });
+    </script>
+
+    <!-- Page-specific scripts like Chart.js -->
+    @stack('scripts')
+
 </body>
+
 </html>

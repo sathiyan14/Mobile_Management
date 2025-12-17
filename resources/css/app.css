@@ -9,3 +9,36 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+
+/* Default: Light Mode */
+body {
+  background-color: #f8f9fa;
+  color: #111;
+  transition: 0.3s ease;
+}
+
+.dark-mode {
+  background-color: #111 !important;
+  color: #fff !important;
+}
+
+/* Sidebar */
+.dark-mode nav {
+  background-color: #222 !important;
+}
+
+/* Tables */
+.dark-mode .table {
+  background-color: #222 !important;
+  color: #fff !important;
+}
+
+/* Card / Dashboard backgrounds */
+.dark-mode .modal-content,
+.dark-mode .timeline-item {
+  background: #222 !important;
+  color: #fff !important;
+}
+
+
