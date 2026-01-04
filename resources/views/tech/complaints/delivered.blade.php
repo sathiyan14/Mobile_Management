@@ -18,7 +18,7 @@
                 ✔ Delivery Confirmed
             </h2>
             
-            <div style="background-color: white; padding: 30px; border-radius: 8px; display: inline-block;">
+            <div style=" padding: 30px; border-radius: 8px; display: inline-block;">
                 <p style="font-size: 16px; margin: 10px 0;">
                     <strong>Device:</strong> {{ $complaint->brand }} - {{ $complaint->model }}
                 </p>

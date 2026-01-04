@@ -7,7 +7,7 @@
     <div class="container mt-4">
         <h3>Customers List</h3>
 
-        <table class="table table-dark table-striped">
+        <table class="table table-dark table-striped" style="text-align:center">
             <thead>
                 <tr>
                     <th>Id</th>

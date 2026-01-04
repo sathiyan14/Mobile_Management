@@ -12,7 +12,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <table class="table table-dark text-center align-middle">
+        <table class="table table-dark text-center align-middle" style="text-align:center">
             <thead>
                 <tr>
                     <th>Id</th>

@@ -15,7 +15,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <table class="table table-dark table-striped">
+        <table class="table table-dark table-striped" style="text-align:center">
             <thead>
                 <tr>
                     <th>ID</th>

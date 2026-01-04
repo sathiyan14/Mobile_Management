@@ -30,7 +30,21 @@
                 Scan this QR code when collecting your device:
             </p>
             <div style="display: flex; justify-content: center; margin: 15px 0; background-color: white; padding: 10px; border-radius: 8px;">
-                {!! $qrSvg !!}
+
+
+                <img src="data:image/png;base64,{{ $qrCode }}"
+                    alt="QR Code"
+                    width="250"
+                    height="250"
+                    style="
+        border:2px solid #007bff;
+        border-radius:8px;
+        padding:6px;
+        display:block;
+        margin:auto;
+     ">
+
+
             </div>
             <p style="font-size: 11px; color: #666; margin-top: 10px;">
                 Complaint ID: <strong>#{{ $complaint->id }}</strong>
@@ -58,4 +72,3 @@
     </div>
 
 </div>
-    

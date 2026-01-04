@@ -144,7 +144,7 @@
 
                                     /* When dark-mode class is active on <body> */
                                     .dark-mode .modal-body {
-                                        color: #3beb67ff !important;
+                                        color: #438cecff !important;
                                     }
                                 </style>
 
